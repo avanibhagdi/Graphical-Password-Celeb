@@ -62,9 +62,9 @@ initCheck()
 
   const handleImageClick = (image,index) => {
     if (numClicks < 6) {
-      // if(numClicks+1!==6){
-      //   shuffleArray()
-      // }
+      if(numClicks+1!==6){
+        shuffleArray()
+      }
       setSelectedImages([...selectedImages, image]);
       setImageStack([...imageStack, image]);
       setSelectedNumbers([...selectedNumbers,index])
@@ -83,21 +83,21 @@ initCheck()
       setNumClicks(numClicks - 1);
       
       // if(numClicks!==){
-        // shuffleArray()
+        shuffleArray()
       // }
 
     }
   };
-//   const shuffleArray = () => {
-// if(doSuffle){
-//   const newArray = [...array];
-//   for (let i = newArray.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-//   }
-//   setArray(newArray);
-// }
-//   };
+  const shuffleArray = () => {
+if(doSuffle){
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  setArray(newArray);
+}
+  };
 
   const isPasswordCorrect = () => {
     if (selectedImages.length !== 6) {
