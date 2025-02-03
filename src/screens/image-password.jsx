@@ -189,6 +189,7 @@ if(true){
        {imageStack.length !== 6 && (
          <p className="inner__text">एक चेहरा चुनें</p>)
        }
+       <FontAwesomeIcon className="btnS" onClick={shuffleArray} text="Shuffle" />
 
   
         {/* cirlce start  */}

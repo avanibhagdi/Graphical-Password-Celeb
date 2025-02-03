@@ -91,6 +91,16 @@ body {
   color: rgba(107, 107, 107, 1);
 }
 
+.btnS {
+  cursor: pointer;
+  height: 43px;
+  width: 43px;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  color: rgba(107, 107, 107, 1);
+}
+
 .success_bt {
   position: relative;
   width: 360px;
