@@ -53,7 +53,7 @@ body {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-size: 43px;
+  font-size: 40px;
   line-height: 22px;
 
   color: #2a263a;
@@ -107,7 +107,7 @@ body {
   position: absolute;
   top: 20px;
   left: 10px;
-  color: rgba(107, 107, 107, 1);
+  color: #047ef2;
 }
 
 .btnS {
@@ -117,7 +117,7 @@ body {
   position: absolute;
   top: 160px;
   left: 140px;
-  color: rgba(107, 107, 107, 1);
+  color: #047ef2;
 }
 
 .success_bt {
