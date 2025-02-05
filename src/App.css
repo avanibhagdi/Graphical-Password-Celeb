@@ -50,11 +50,11 @@ body {
   transform: translate(-50%);
   top: 100px;
 
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 700;
-  font-size: 35px;
-  line-height: 42px;
-  text-align: center;
+  font-weight: 600;
+  font-size: 43px;
+  line-height: 22px;
 
   color: #2a263a;
 }
@@ -115,7 +115,7 @@ body {
   height: 93px;
   width: 93px;
   position: absolute;
-  top: 30%;
+  top: 160px;
   left: 40%;
   color: rgba(107, 107, 107, 1);
 }
@@ -159,7 +159,7 @@ body {
   width: 238px;
   height: 52px;
   text-align: center;
-  top: 108px;
+  top: 65px;
   left: 50%;
   transform: translate(-50%);
   color: white;
