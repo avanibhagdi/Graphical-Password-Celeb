@@ -40,9 +40,28 @@ body {
   color: #6b6b6b;
 }
 
+.inner__text1 {
+  /* एक चेहरा चुनें */
+
+  position: absolute;
+  width: 500.75px;
+  height: 42px;
+  left: 50%;
+  transform: translate(-50%);
+  top: 100px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 42px;
+  text-align: center;
+
+  color: #2a263a;
+}
+
 .outer__div__circle {
   position: relative;
-  top: 180px;
+  top: 130px;
   display: flex;
   justify-content: space-evenly;
 }
@@ -63,7 +82,7 @@ body {
 }
 .images__box {
   position: relative;
-  top: 248px;
+  top: 178px;
   margin-left: 16px;
   margin-right: 16px;
 }
@@ -93,11 +112,11 @@ body {
 
 .btnS {
   cursor: pointer;
-  height: 43px;
-  width: 43px;
+  height: 93px;
+  width: 93px;
   position: absolute;
-  top: 20px;
-  left: 300px;
+  top: 30%;
+  left: 40%;
   color: rgba(107, 107, 107, 1);
 }
 

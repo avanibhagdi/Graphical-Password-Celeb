@@ -193,8 +193,12 @@ if(true){
          <span className="confirm-button-text"> {text}</span>
         </button>
       )}
-       {imageStack.length !== 6 && (
+       {imageStack.length !== 6 && numShuffles > 0 &&(
          <p className="inner__text">एक चेहरा चुनें</p>)
+       }
+
+      {imageStack.length !== 6 && numShuffles === 0 &&(
+         <p className="inner__text1">Press play to start</p>)
        }
 
   
@@ -208,9 +212,9 @@ if(true){
          }
             </div>
           ))}
-          {[...Array(6 - selectedImages.length)].map((image, index) => (
+          {numShuffles > 0  && ([...Array(6 - selectedImages.length)].map((image, index) => (
             <div key={index} className="inner__circle"></div>
-          ))}
+          )))}
         </div>
 
         {/* cirlce ends  */}
