@@ -194,7 +194,7 @@ if(true){
         </button>
       )}
        {imageStack.length !== 6 && numShuffles > 0 &&(
-         <p className="inner__text">एक चेहरा चुनें</p>)
+         <p className="inner__text">Pick a Face</p>)
        }
 
       {imageStack.length !== 6 && numShuffles === 0 &&(

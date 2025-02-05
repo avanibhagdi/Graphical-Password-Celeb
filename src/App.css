@@ -37,7 +37,7 @@ body {
   line-height: 42px;
   text-align: center;
 
-  color: #6b6b6b;
+  color: #241d1d;
 }
 
 .inner__text1 {
@@ -53,7 +53,7 @@ body {
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
-  font-size: 40px;
+  font-size: 32px;
   line-height: 22px;
 
   color: #2a263a;
@@ -112,8 +112,8 @@ body {
 
 .btnS {
   cursor: pointer;
-  height: 93px;
-  width: 93px;
+  height: 73px;
+  width: 73px;
   position: absolute;
   top: 160px;
   left: 140px;
