@@ -42,7 +42,7 @@ export default function Imagepassword() {
        
         // setDoSuffle(false)
 
-        setText("Set as password")
+        setText("Confirm Passfaces")
        }
       }
       catch(er){
@@ -198,7 +198,7 @@ if(true){
        }
 
       {imageStack.length !== 6 && numShuffles === 0 &&(
-         <p className="inner__text1">Press play to start</p>)
+         <p className="inner__text1">Press Play to Start</p>)
        }
 
   
