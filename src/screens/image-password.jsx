@@ -34,7 +34,7 @@ export default function Imagepassword() {
         const docRef = doc(db, "celeb_graphical_password_4x4",localStorage.getItem("name"));
         const docSnap = await getDoc(docRef);
        if (docSnap.exists()){
-        setText("Confirm")
+        setText("Confirm Passfaces")
         
        
         // setDoSuffle(true)
