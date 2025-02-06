@@ -14,6 +14,7 @@ export default function Imagepassword() {
   const [numShuffles, setNumShuffles] = useState(0);
   const [imageStack, setImageStack] = useState([]);
   const [selectedNumbers,setSelectedNumbers] = useState([]);
+  const [selectedPositions, setSelectedPositions] = useState([]);
   const [array, setArray] = useState([...Array(16)].map((_, index) => index));
   const [timer,setTimer] = useState(0);
   const [text,setText] = useState("");
@@ -31,7 +32,7 @@ export default function Imagepassword() {
 
     const initCheck =async ()=>{
       try{
-        const docRef = doc(db, "celeb_graphical_password_4x4",localStorage.getItem("name"));
+        const docRef = doc(db, "celeb_graphical_password_4x4_1",localStorage.getItem("name"));
         const docSnap = await getDoc(docRef);
        if (docSnap.exists()){
         setText("Confirm Passfaces")
@@ -61,7 +62,7 @@ initCheck()
      }, 1000);
   },[timer])
 
-  const handleImageClick = (image,index) => {
+  const handleImageClick = (image,index, position) => {
     if (numClicks < 6) {
       if(numClicks+1!==6){
         shuffleArray()
@@ -70,8 +71,7 @@ initCheck()
       setImageStack([...imageStack, image]);
       setSelectedNumbers([...selectedNumbers,index])
       setNumClicks(numClicks + 1);
-  
-          
+      setSelectedPositions([...selectedPositions, position]);          
     }
     
   };
@@ -114,11 +114,11 @@ if(true){
   };
 
   const handleConfirmClick = async ()=>{
-    const docRef = doc(db, "celeb_graphical_password_4x4",localStorage.getItem("name"));
+    const docRef = doc(db, "celeb_graphical_password_4x4_1",localStorage.getItem("name"));
     const docSnap = await getDoc(docRef);
    if (docSnap.exists()){
   //  console.log(docSnap.data())
-  //  const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4", localStorage.getItem("name"), "attempts");
+  //  const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4_1", localStorage.getItem("name"), "attempts");
   //  const attemptsSnapshot = await getDocs(attemptsCollectionRef);
  
   //  const numberOfAttempts = attemptsSnapshot.size;
@@ -129,10 +129,11 @@ if(true){
   //  }
 
    if(docSnap.data().setup.toString()===selectedNumbers.toString()){
-    await setDoc(doc(db, "celeb_graphical_password_4x4",localStorage.getItem("name"),"attempts",`recall-${Date.now()}`), {
+    await setDoc(doc(db, "celeb_graphical_password_4x4_1",localStorage.getItem("name"),"attempts",`recall-${Date.now()}`), {
       time: new Date(),
       setup:docSnap.data().setup,
       recall:selectedNumbers ,
+      positions: selectedPositions,
       incorrect:"",
       status:true   ,
       time_taken:timer
@@ -146,10 +147,11 @@ if(true){
        incorrect.push(docSnap.data().setup[index])
       } 
     });
-    await setDoc(doc(db, "celeb_graphical_password_4x4",localStorage.getItem("name"),"attempts",`recall-${Date.now()}`), {
+    await setDoc(doc(db, "celeb_graphical_password_4x4_1",localStorage.getItem("name"),"attempts",`recall-${Date.now()}`), {
       time: new Date(),
       setup:docSnap.data().setup,
       recall:selectedNumbers ,
+      positions: selectedPositions,
       status:false  ,
       incorrect:incorrect,
       time_taken:timer,
@@ -161,10 +163,11 @@ if(true){
    }
    else{
    
-    await setDoc(doc(db, "celeb_graphical_password_4x4",localStorage.getItem("name")), {
+    await setDoc(doc(db, "celeb_graphical_password_4x4_1",localStorage.getItem("name")), {
       time:new Date(),
       name: localStorage.getItem("name"),
       setup:selectedNumbers   ,
+      setup_positions: selectedPositions,
       setup_time_taken:timer
 
     });
@@ -222,7 +225,7 @@ if(true){
         {numShuffles > 0 &&(<div className="images__box">
           <div className="grid-container">
             {
-              array.map((im,index)=><div key={im} onClick={() => handleImageClick(require(`../assets/Celeb${numClicks+1>6?6:numClicks+1}/${im+1}.jpg`),im+1)} className="grid-item">
+              array.map((im,index)=><div key={im} onClick={() => handleImageClick(require(`../assets/Celeb${numClicks+1>6?6:numClicks+1}/${im+1}.jpg`),im+1, index+1)} className="grid-item">
               <img alt="img1" src={require(`../assets/Celeb${numClicks+1>6?6:numClicks+1}/${im+1}.jpg`)} width={76} height={76} />
             </div>)
             }
