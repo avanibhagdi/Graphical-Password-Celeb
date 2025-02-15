@@ -6,8 +6,7 @@ import { faCircleArrowLeft, faCirclePlay, faCircleQuestion } from '@fortawesome/
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
-
+// to use the name and session stored in the other file (App.js) we will use localStorage to get them
 export default function Imagepassword() {
   const [selectedImages, setSelectedImages] = useState([]);
   const [numClicks, setNumClicks] = useState(0);
@@ -35,7 +34,7 @@ export default function Imagepassword() {
         const docRef = doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name"));
         const docSnap = await getDoc(docRef);
        if (docSnap.exists()){
-        setText("Confirm Passfaces")
+        setText("Done")
         
        
         // setDoSuffle(true)
@@ -43,7 +42,7 @@ export default function Imagepassword() {
        
         // setDoSuffle(false)
 
-        setText("Confirm Passfaces")
+        setText("Done")
        }
       }
       catch(er){
@@ -61,6 +60,41 @@ initCheck()
       setTimer(timer+1)
      }, 1000);
   },[timer])
+
+
+  const checkURL = async() => {
+    const docRef = doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name"));
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()){
+      console.log("here1");
+      console.log(docSnap.data())
+      const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4_final", localStorage.getItem("name"), "attempts");
+      const attemptsSnapshot = await getDocs(attemptsCollectionRef);
+    
+      const numberOfAttempts = attemptsSnapshot.size;
+      console.log(numberOfAttempts);
+      if(numberOfAttempts===0){
+        if(localStorage.getItem("session")!==0){
+          toast.error("Invalid session")
+          return
+        }
+      }
+      if(numberOfAttempts!=localStorage.getItem("session")){
+        toast.error("Invalid session")
+        return
+      }
+    }
+    else{
+      console.log("here");
+      console.log(localStorage.getItem("session"));
+      if(Number(localStorage.getItem("session"))!==0){
+        toast.error("Invalid session")
+        return
+      }
+    }
+    shuffleArray();
+}
+
 
   const handleImageClick = (image,index, position) => {
     if (numClicks < 6) {
@@ -81,7 +115,7 @@ initCheck()
       setImageStack(imageStack.slice(0, -1));
       setSelectedImages(selectedImages.slice(0, -1));
       setSelectedNumbers(selectedNumbers.slice(0,-1));
-      selectedPositions(selectedPositions.slice(0, -1));
+      setSelectedPositions(selectedPositions.slice(0, -1));
       setNumClicks(numClicks - 1);
       
       // if(numClicks!==){
@@ -186,7 +220,7 @@ if(true){
         )}
         {imageStack.length >= 0 && numShuffles<1 && (
          
-         <FontAwesomeIcon className="btnS" onClick={shuffleArray} icon={faCirclePlay}/>
+         <FontAwesomeIcon className="btnS" onClick={checkURL} icon={faCirclePlay}/>
            
           )}
 
@@ -198,7 +232,7 @@ if(true){
         </button>
       )}
        {imageStack.length !== 6 && numShuffles > 0 &&(
-         <p className="inner__text">Pick a Face</p>)
+         <p className="inner__text">Set Passfaces</p>)
        }
 
       {imageStack.length !== 6 && numShuffles === 0 &&(
