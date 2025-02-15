@@ -79,6 +79,10 @@ initCheck()
           return
         }
       }
+      if(numberOfAttempts>=5){
+        toast.error("You have exhausted all recall attempts")
+        return
+      }
       if(numberOfAttempts!=localStorage.getItem("session")){
         toast.error("Invalid session")
         return
