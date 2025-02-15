@@ -82,13 +82,13 @@ initCheck()
       }
       console.log(Number(((Number(localStorage.getItem("recall"))-1)*4+Number(localStorage.getItem("attempt")))-1))
       if(numberOfAttempts!==Number(((Number(localStorage.getItem("recall"))-1)*4+Number(localStorage.getItem("attempt")))-1)){
-        toast.error("Invalid session1")
+        toast.error("Invalid session")
         return
       }
     }
     else{
       if(Number(localStorage.getItem("recall"))!==0){
-        toast.error("Invalid session2")
+        toast.error("Invalid session")
         return
       }
     }
