@@ -71,20 +71,24 @@ initCheck()
       const attemptsSnapshot = await getDocs(attemptsCollectionRef);
     
       const numberOfAttempts = attemptsSnapshot.size;
-      // console.log(numberOfAttempts);
-      // console.log(localStorage.getItem("session"));
-      if(numberOfAttempts>=4){
+      console.log(numberOfAttempts);
+      if(Number(localStorage.getItem("attempt"))>=5 || Number(localStorage.getItem("recall"))>=4 || Number(localStorage.getItem("attempt"))<=0 || Number(localStorage.getItem("recall"))<=0){
+        toast.error("You have exhausted all recall attempts");
+        return
+      }
+      if(numberOfAttempts>=12){
         toast.error("You have exhausted all recall attempts")
         return
       }
-      if(numberOfAttempts!==(Number(localStorage.getItem("session"))-1)){
-        toast.error("Invalid session")
+      console.log(Number(((Number(localStorage.getItem("recall"))-1)*4+Number(localStorage.getItem("attempt")))-1))
+      if(numberOfAttempts!==Number(((Number(localStorage.getItem("recall"))-1)*4+Number(localStorage.getItem("attempt")))-1)){
+        toast.error("Invalid session1")
         return
       }
     }
     else{
-      if(Number(localStorage.getItem("session"))!==0){
-        toast.error("Invalid session")
+      if(Number(localStorage.getItem("recall"))!==0){
+        toast.error("Invalid session2")
         return
       }
     }

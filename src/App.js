@@ -13,14 +13,14 @@ import "react-toastify/dist/ReactToastify.css";
 const url = new URL(window.location.href);
 const name = url.searchParams.get("name"); // example url : http://localhost:3000/?name=John
 localStorage.setItem("name", name);
-// we will use this name to create a url for each user
-// example url : http://localhost:3000/John
 console.log(name);
-// we also want to get the session number, 0 for setup and so on
-const session = url.searchParams.get("session"); // example url : http://localhost:3000/?name=John&session=0
-localStorage.setItem("session", session);
-console.log(session);
-// I want to be able to use the name and session number in the other file (image-password.jsx) so I will use localStorage to store them
+const recall = url.searchParams.get("recall"); 
+localStorage.setItem("recall", recall);
+console.log(recall);
+
+const attempt = url.searchParams.get("attempt"); 
+localStorage.setItem("attempt", attempt);
+console.log(attempt);
 
 const router = createBrowserRouter([
   {
