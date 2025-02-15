@@ -73,12 +73,6 @@ initCheck()
       const numberOfAttempts = attemptsSnapshot.size;
       // console.log(numberOfAttempts);
       // console.log(localStorage.getItem("session"));
-      if(numberOfAttempts===0){
-        if(Number(localStorage.getItem("session"))!==1){
-          toast.error("Invalid session")
-          return
-        }
-      }
       if(numberOfAttempts>=4){
         toast.error("You have exhausted all recall attempts")
         return
