@@ -66,31 +66,29 @@ initCheck()
     const docRef = doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name"));
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()){
-      console.log("here1");
-      console.log(docSnap.data())
+      // console.log(docSnap.data())
       const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4_final", localStorage.getItem("name"), "attempts");
       const attemptsSnapshot = await getDocs(attemptsCollectionRef);
     
       const numberOfAttempts = attemptsSnapshot.size;
-      console.log(numberOfAttempts);
+      // console.log(numberOfAttempts);
+      // console.log(localStorage.getItem("session"));
       if(numberOfAttempts===0){
-        if(localStorage.getItem("session")!==0){
+        if(Number(localStorage.getItem("session"))!==1){
           toast.error("Invalid session")
           return
         }
       }
-      if(numberOfAttempts>=5){
+      if(numberOfAttempts>=4){
         toast.error("You have exhausted all recall attempts")
         return
       }
-      if(numberOfAttempts!=localStorage.getItem("session")){
+      if(numberOfAttempts!==(Number(localStorage.getItem("session"))-1)){
         toast.error("Invalid session")
         return
       }
     }
     else{
-      console.log("here");
-      console.log(localStorage.getItem("session"));
       if(Number(localStorage.getItem("session"))!==0){
         toast.error("Invalid session")
         return
