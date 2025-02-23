@@ -69,22 +69,65 @@ initCheck()
       // console.log(docSnap.data())
       const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4_final", localStorage.getItem("name"), "attempts");
       const attemptsSnapshot = await getDocs(attemptsCollectionRef);
-    
       const numberOfAttempts = attemptsSnapshot.size;
-      console.log(numberOfAttempts);
-      if(Number(localStorage.getItem("attempt"))>=5 || Number(localStorage.getItem("recall"))>=4 || Number(localStorage.getItem("attempt"))<=0 || Number(localStorage.getItem("recall"))<=0){
-        toast.error("You have exhausted all recall attempts");
-        return
+      const subdoc = await getDocs(
+        collection(db, "celeb_graphical_password_4x4_final/" + docSnap.id + "/attempts")
+      );
+
+      var last_recall = 0;
+      var last_correct_recall = 0;
+      var last_attempt_rec = 0;
+      var last_status = -1;
+      subdoc.forEach((dat) => {
+        console.log(dat.data().status);
+        if (dat.data().status == true){
+          last_status = 1;
+          last_correct_recall = Number(dat.data().recall);
+        }
+        else{
+          last_status = 0;
+        }
+        last_recall = Number(dat.data().recall);
+        last_attempt_rec = Number(dat.data().attempt);
+      });
+
+      const link_recall = Number(localStorage.getItem("recall"));
+      const link_attempt_rec = Number(localStorage.getItem("attempt"));
+      if(last_status == -1){
+        if(!((link_recall === 1) && (link_attempt_rec === 1))){
+          toast.error("Invalid Session");
+          return;
+        }
       }
-      if(numberOfAttempts>=12){
-        toast.error("You have exhausted all recall attempts")
-        return
+      else{
+        if(last_correct_recall === last_recall){
+          if(!(((link_recall === last_recall + 1) && (link_attempt_rec === 1)) || ((link_recall === last_recall) && (link_attempt_rec === last_attempt_rec + 1)))){
+            toast.error("Invalid Session");
+            return;
+          }
+        }
+        else{
+          if(last_attempt_rec === 4){
+            if(!((link_recall === last_recall + 1) && (link_attempt_rec === 1))){
+              toast.error("Invalid Session");
+              return;
+            }
+          }
+          else{
+            if(!((link_recall === last_recall ) && (link_attempt_rec === last_attempt_rec + 1))){
+              toast.error("Invalid Session");
+              return;
+            }
+          }
+        }
       }
-      console.log(Number(((Number(localStorage.getItem("recall"))-1)*4+Number(localStorage.getItem("attempt")))-1))
-      if(numberOfAttempts!==Number(((Number(localStorage.getItem("recall"))-1)*4+Number(localStorage.getItem("attempt")))-1)){
-        toast.error("Invalid session")
-        return
+      if(link_recall > 3 || link_attempt_rec > 4 || link_attempt_rec < 1 || link_recall < 1){
+        toast.error("Invalid Link");
+        return;
       }
+      console.log(last_correct_recall)
+      console.log(last_recall)
+      console.log(last_attempt_rec);
     }
     else{
       if(Number(localStorage.getItem("recall"))!==0){
@@ -171,7 +214,9 @@ if(true){
       positions: selectedPositions,
       incorrect:"",
       status:true   ,
-      time_taken:timer
+      time_taken:timer,
+      recall:localStorage.getItem("recall"),
+      attempt: localStorage.getItem("attempt")
 
     });
     navigate("/verified");
@@ -190,6 +235,8 @@ if(true){
       status:false  ,
       incorrect:incorrect,
       time_taken:timer,
+      recall:localStorage.getItem("recall"),
+      attempt: localStorage.getItem("attempt")
 
 
     });

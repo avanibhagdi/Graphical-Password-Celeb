@@ -16,11 +16,11 @@ localStorage.setItem("name", name);
 console.log(name);
 const recall = url.searchParams.get("recall"); 
 localStorage.setItem("recall", recall);
-console.log(recall);
+// console.log(recall);
 
 const attempt = url.searchParams.get("attempt"); 
 localStorage.setItem("attempt", attempt);
-console.log(attempt);
+// console.log(attempt);
 
 const router = createBrowserRouter([
   {
