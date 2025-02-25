@@ -66,7 +66,7 @@ initCheck()
   const checkURL = async() => {
     var uname = localStorage.getItem("name");
     const numid = parseInt(uname);
-    if(isNaN(numid) || numid<1 || numid>50){
+    if((isNaN(numid) || numid<1 || numid>50) &&(!pilot_users.includes(uname))){
       toast.error("Invalid User");
       return;
     }
