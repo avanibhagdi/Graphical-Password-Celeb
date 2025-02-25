@@ -17,6 +17,7 @@ export default function Imagepassword() {
   const [array, setArray] = useState([...Array(16)].map((_, index) => index));
   const [timer,setTimer] = useState(0);
   const [text,setText] = useState("");
+  const pilot_users = ["pilot1", "pilot2", "pilot3", "pilot4", "pilot5", "pilot6", "pilot7", "pilot8", "pilot9", "pilot10", "pilot11", "pilot12", "pilot13"];
   // const [doSuffle,setDoSuffle] = useState(false)
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ export default function Imagepassword() {
 
     const initCheck =async ()=>{
       try{
-        const docRef = doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name"));
+        const docRef = doc(db, "celeb_graphical_password_4x4_final_1",localStorage.getItem("name"));
         const docSnap = await getDoc(docRef);
        if (docSnap.exists()){
         setText("Done")
@@ -63,15 +64,21 @@ initCheck()
 
 
   const checkURL = async() => {
-    const docRef = doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name"));
+    var uname = localStorage.getItem("name");
+    const numid = parseInt(uname);
+    if(isNaN(numid) || numid<1 || numid>50){
+      toast.error("Invalid User");
+      return;
+    }
+    const docRef = doc(db, "celeb_graphical_password_4x4_final_1",localStorage.getItem("name"));
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()){
       // console.log(docSnap.data())
-      const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4_final", localStorage.getItem("name"), "attempts");
+      const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4_final_1", localStorage.getItem("name"), "attempts");
       const attemptsSnapshot = await getDocs(attemptsCollectionRef);
       const numberOfAttempts = attemptsSnapshot.size;
       const subdoc = await getDocs(
-        collection(db, "celeb_graphical_password_4x4_final/" + docSnap.id + "/attempts")
+        collection(db, "celeb_graphical_password_4x4_final_1/" + docSnap.id + "/attempts")
       );
 
       var last_recall = 0;
@@ -192,11 +199,11 @@ if(true){
   };
 
   const handleConfirmClick = async ()=>{
-    const docRef = doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name"));
+    const docRef = doc(db, "celeb_graphical_password_4x4_final_1",localStorage.getItem("name"));
     const docSnap = await getDoc(docRef);
    if (docSnap.exists()){
   //  console.log(docSnap.data())
-  //  const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4_final", localStorage.getItem("name"), "attempts");
+  //  const attemptsCollectionRef = collection(db, "celeb_graphical_password_4x4_final_1", localStorage.getItem("name"), "attempts");
   //  const attemptsSnapshot = await getDocs(attemptsCollectionRef);
  
   //  const numberOfAttempts = attemptsSnapshot.size;
@@ -207,7 +214,7 @@ if(true){
   //  }
 
    if(docSnap.data().setup.toString()===selectedNumbers.toString()){
-    await setDoc(doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name"),"attempts",`recall-${Date.now()}`), {
+    await setDoc(doc(db, "celeb_graphical_password_4x4_final_1",localStorage.getItem("name"),"attempts",`recall-${Date.now()}`), {
       timestamp: new Date().toString(),
       setup:docSnap.data().setup,
       recall:selectedNumbers ,
@@ -227,7 +234,7 @@ if(true){
        incorrect.push(docSnap.data().setup[index])
       } 
     });
-    await setDoc(doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name"),"attempts",`recall-${Date.now()}`), {
+    await setDoc(doc(db, "celeb_graphical_password_4x4_final_1",localStorage.getItem("name"),"attempts",`recall-${Date.now()}`), {
       timestamp: new Date().toString(),
       setup:docSnap.data().setup,
       recall:selectedNumbers ,
@@ -245,7 +252,7 @@ if(true){
    }
    else{
    
-    await setDoc(doc(db, "celeb_graphical_password_4x4_final",localStorage.getItem("name")), {
+    await setDoc(doc(db, "celeb_graphical_password_4x4_final_1",localStorage.getItem("name")), {
       timestamp: new Date().toString(),
       name: localStorage.getItem("name"),
       setup:selectedNumbers   ,
@@ -293,7 +300,7 @@ if(true){
           {selectedImages.map((image, index) => (
             <div key={index} className="inner__circle">
            {
-          index+1 !== selectedImages.length ?<div className="div__askterisk">*</div> :<img src={image} key={index} />
+          <img src={image} key={index} />
          }
             </div>
           ))}

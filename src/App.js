@@ -11,6 +11,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // to create a url for each user, we will now use get method to get name of user and extract username from it to use in the app
 const url = new URL(window.location.href);
+console.log(url.search);
+
 const name = url.searchParams.get("name"); // example url : http://localhost:3000/?name=John
 localStorage.setItem("name", name);
 console.log(name);
