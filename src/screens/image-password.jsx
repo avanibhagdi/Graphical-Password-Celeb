@@ -151,7 +151,7 @@ initCheck()
       if(numClicks+1!==6){
         shuffleArray()
       }
-      
+      window.scrollTo(0,0);
       setSelectedImages([...selectedImages, image]);
       setImageStack([...imageStack, image]);
       setSelectedNumbers([...selectedNumbers,index])
