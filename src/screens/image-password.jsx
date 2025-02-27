@@ -151,6 +151,7 @@ initCheck()
       if(numClicks+1!==6){
         shuffleArray()
       }
+      
       setSelectedImages([...selectedImages, image]);
       setImageStack([...imageStack, image]);
       setSelectedNumbers([...selectedNumbers,index])
