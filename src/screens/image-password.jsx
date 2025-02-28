@@ -89,13 +89,13 @@ initCheck()
         console.log(dat.data().status);
         if (dat.data().status == true){
           last_status = 1;
-          last_correct_recall = Number(dat.data().recall);
+          last_correct_recall = Number(dat.data().recall1);
         }
         else{
           last_status = 0;
         }
-        last_recall = Number(dat.data().recall);
-        last_attempt_rec = Number(dat.data().attempt);
+        last_recall = Number(dat.data().recall1);
+        last_attempt_rec = Number(dat.data().attempt1);
       });
 
       const link_recall = Number(localStorage.getItem("recall"));
@@ -223,8 +223,8 @@ if(true){
       incorrect:"",
       status:true   ,
       time_taken:timer,
-      recall:localStorage.getItem("recall"),
-      attempt: localStorage.getItem("attempt")
+      recall1:localStorage.getItem("recall"),
+      attempt1: localStorage.getItem("attempt")
 
     });
     navigate("/verified");
@@ -243,8 +243,8 @@ if(true){
       status:false  ,
       incorrect:incorrect,
       time_taken:timer,
-      recall:localStorage.getItem("recall"),
-      attempt: localStorage.getItem("attempt")
+      recall1:localStorage.getItem("recall"),
+      attempt1: localStorage.getItem("attempt")
 
 
     });
