@@ -12,10 +12,8 @@ export default function ErrorC() {
     useEffect(() => {
    
       if(!localStorage.getItem("name")){
-        navigate("/")
       }
       setTimeout(() => {
-        navigate("/")
        }, 2000);
    
     });

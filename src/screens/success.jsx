@@ -8,7 +8,6 @@ export default function Success() {
 
     useEffect(() => {
         setTimeout(() => {
-         navigate("/")
         }, 2000);
       });
   return (

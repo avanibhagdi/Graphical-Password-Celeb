@@ -10,10 +10,8 @@ export default function Verified() {
     useEffect(() => {
    
       if(!localStorage.getItem("name")){
-        navigate("/")
       }
       setTimeout(() => {
-        navigate("/")
        }, 2000);
     
     });
